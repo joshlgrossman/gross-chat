@@ -19,6 +19,7 @@
     "http-server": "*",
     "jsonwebtoken": "*",
     "mongoose": "*",
+    "mongojs": "*",
     "passport": "*",
     "passport-jwt": "*",
     "mysql": "*",

@@ -1,5 +1,6 @@
 const config = require('./utils/config');
 const knex = require('./utils/bookshelf').knex;
+const db = require('mongojs')(config.nosql_database_connection_string);
 const colors = require('colors');
 const spawn = require('child_process').spawn;
 const shell = require('readline').createInterface({
@@ -101,8 +102,15 @@ function Command({aliases, help, execute = ()=>undefined}){
 }
 Command.List = [];
 Command.Aliases = [];
+Command.Dangerous = function(properties){
+  properties.help = properties.help + ' (dangerous!)'.red;
+  Command.call(this, properties);
+}
+Command.Unstable = function(properties){
+  properties.help = properties.help + ' (unstable!)'.yellow;
+  Command.call(this, properties);
+}
 Command.print = (message) => console.log(`${prompt2}${message}`);
-Command.dangerous = (help) => help+' (dangerous!)'.red;
 Command.prompt = (message, exec) => {
   return (args) => {
     shell.question(`${prompt2}${message} (y/n): `, (answer) => {
@@ -151,9 +159,9 @@ Command.Time = new Command({
     Command.print(`Up time: ${formatTimeDifference(Date.now() - startTime)}`);
   }
 });
-Command.Eval = new Command({
+Command.Eval = new Command.Dangerous({
   aliases: ['eval'],
-  help: Command.dangerous('Evaluate expression'),
+  help: 'Evaluate expression',
   execute: ([expr,...rest]) => {
     try {
       Command.print(eval(expr));
@@ -162,9 +170,9 @@ Command.Eval = new Command({
     }
   }
 });
-Command.Query = new Command({
-  aliases: ['query', 'sql'],
-  help: Command.dangerous('Query database'),
+Command.Sql = new Command.Dangerous({
+  aliases: ['sql'],
+  help: 'Query SQL database',
   execute: ([query, ...rest]) => {
     const queryStart = Date.now();
     if(!query) return;
@@ -172,11 +180,26 @@ Command.Query = new Command({
       try {
         const [result, ...rest] = await knex.raw(query);
         result.forEach(r => Command.print(JSON.stringify(r)));
-      } catch(e) {
+      } catch (e) {
         Command.print(e);
       }
       Command.print(`Execution time: ${Date.now() - queryStart}ms`.grey);
       resolve();
+    });
+  }
+});
+Command.NoSql = new Command.Unstable({
+  aliases: ['nosql'],
+  help: 'Query NoSQL database',
+  execute: ([query, ...rest]) => {
+    const queryStart = Date.now();
+    if(!query) return;
+    return new Promise(async (resolve, reject) => {
+      eval(query).forEach((error, result) => {
+        if(!result) resolve();
+        if(!error) Command.print(JSON.stringify(result));
+        else Command.print(error);
+      });
     });
   }
 });

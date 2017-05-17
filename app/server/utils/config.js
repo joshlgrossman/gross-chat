@@ -21,4 +21,9 @@ const defaults = {
 for(let key in config) defaults[key] = config[key];
 for(let key in args) defaults[key] = args[key];
 
+const nosqlAuth = config.nosql_database_user && config.nosql_database_password ?
+  `${config.nosql_database_user}:${config.nosql_database_password}@` : '';
+
+defaults.nosql_database_connection_string = `mongodb://${nosqlAuth}${defaults.nosql_database_host}/${config.nosql_database_name}`;
+
 module.exports = defaults;

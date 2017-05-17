@@ -1,11 +1,8 @@
 const config = require('./config');
 const mongoose = require('mongoose');
 
-const auth = config.nosql_database_user && config.nosql_database_password ?
-  `${config.nosql_database_user}:${config.nosql_database_password}@` : '';
-
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${auth}${config.nosql_database_host}/${config.nosql_database_name}`, {
+mongoose.connect(config.nosql_database_connection_string, {
   server: {
     socketOptions: {
       keepAlive: 120
