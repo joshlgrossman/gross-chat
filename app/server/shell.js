@@ -196,8 +196,11 @@ Command.NoSql = new Command.Unstable({
     if(!query) return;
     return new Promise(async (resolve, reject) => {
       eval(query).forEach((error, result) => {
-        if(!result) resolve();
-        if(!error) Command.print(JSON.stringify(result));
+        if(!result) {
+          Command.print(`Execution time: ${Date.now() - queryStart}ms`.grey);
+          resolve();
+        }
+        else if(!error) Command.print(JSON.stringify(result));
         else Command.print(error);
       });
     });

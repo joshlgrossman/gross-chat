@@ -28,7 +28,8 @@
     "lodash": "*",
     "bluebird": "*",
     "colors": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "node-schedule": "*"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

@@ -14,6 +14,7 @@ const channelRoute = require('./routes/channel');
 const messageSocket = require('./sockets/message');
 
 const shell = require('./shell');
+const cron = require('./cron');
 
 passport.use(passportStrategy);
 
@@ -33,14 +34,12 @@ const app = express()
 let server;
 
 if(!config.ssl) {
-	const http = require('http');
-	server = http.createServer(app);
+	server = require('http').createServer(app);
 } else {
-	const https = require('https');
 	const fs = require('fs');
 	const key = fs.readFileSync(config.ssl_key);
 	const cert = fs.readFileSync(config.ssl_cert);
-	server = https.createServer({key, cert}, app).listen(config.port, shell.start);
+	server = require('https').createServer({key, cert}, app).listen(config.port, shell.start);
 }
 
 const io = require('socket.io')(server);
