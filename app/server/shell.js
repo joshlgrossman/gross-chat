@@ -9,8 +9,6 @@ const shell = require('readline').createInterface({
   output: process.stdout,
   completer(line){
     let completions = line ? Command.Aliases : [];
-    if(line.indexOf('cron') >= 0)
-      completions = completions.concat(Object.keys(cron));
     const hits = completions.filter(completion => completion.indexOf(line) == 0);
     return [hits&&hits.length>0 ? hits : completions, line];
   }
@@ -213,9 +211,10 @@ Command.Cron = new Command.Unstable({
   aliases: ['cron'],
   help: 'Access to cronjob',
   execute: ([job, func, ...params]) => {
-    if(cron[job] && cron[job][func]){
-      func = cron[job][func]
-      if(func.apply) func.apply(null, params);
+    job = cron[job];
+    if(job && job[func]){
+      func = job[func];
+      if(func.apply) func.apply(job, params);
     }
   }
 });
