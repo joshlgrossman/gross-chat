@@ -3,7 +3,7 @@ const shell = require('./shell');
 const Message = require('./documents/Message');
 
 // at 4:00am, daily
-schedule.scheduleJob({minute: 0, hour: 4}, () => {
+const deleteOldMessages = schedule.scheduleJob({minute: 0, hour: 4}, () => {
   const twoDaysAgo = Date.now() - 172800000;
 
   shell.trace('Cronjob running');
@@ -12,4 +12,6 @@ schedule.scheduleJob({minute: 0, hour: 4}, () => {
     .catch(error => shell.trace(`Cronjob failed: ${error}`));
 });
 
-module.exports = schedule;
+module.exports = {
+  deleteOldMessages
+};

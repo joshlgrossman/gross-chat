@@ -1,4 +1,5 @@
 const config = require('./utils/config');
+const cron = require('./cron');
 const knex = require('./utils/bookshelf').knex;
 const db = require('mongojs')(config.nosql_database_connection_string);
 const colors = require('colors');
@@ -7,7 +8,9 @@ const shell = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
   completer(line){
-    const completions = line ? Command.Aliases : [];
+    let completions = line ? Command.Aliases : [];
+    if(line.indexOf('cron') >= 0)
+      completions = completions.concat(Object.keys(cron));
     const hits = completions.filter(completion => completion.indexOf(line) == 0);
     return [hits&&hits.length>0 ? hits : completions, line];
   }
@@ -204,6 +207,16 @@ Command.NoSql = new Command.Unstable({
         else Command.print(error);
       });
     });
+  }
+});
+Command.Cron = new Command.Unstable({
+  aliases: ['cron'],
+  help: 'Access to cronjob',
+  execute: ([job, func, ...params]) => {
+    if(cron[job] && cron[job][func]){
+      func = cron[job][func]
+      if(func.apply) func.apply(null, params);
+    }
   }
 });
 
