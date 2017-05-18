@@ -22,6 +22,11 @@ app.factory('user', ['$cookies', '$http', function($cookies, $http){
 		}
 	}
 
+	function is(name){
+		const user = current();
+		return user && user.name === name;
+	}
+
 	function isLoggedIn(){ return current() !== undefined; }
 
 	function login({name, password}){
@@ -37,6 +42,6 @@ app.factory('user', ['$cookies', '$http', function($cookies, $http){
 		return $http.post('/user/register', {name, password});
 	}
 
-	return {current, token, data, login, logout, isLoggedIn, register};
+	return {current, token, data, login, logout, is, isLoggedIn, register};
 
 }]);
