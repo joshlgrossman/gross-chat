@@ -2,9 +2,13 @@ app.component('channel', {
 
   templateUrl: 'template.html',
 
+  bindings: {
+    name: '<'
+  },
+
   controller: ['$scope', 'channel', function($scope, channel){
     this.messages = [];
-    this.name = 'general';
+    this.name = this.name || 'general';
     this.connection = channel.connect(this.name);
 
     const push = message => {
