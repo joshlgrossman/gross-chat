@@ -2,10 +2,10 @@ app.component('channel', {
 
   templateUrl: 'template.html',
 
-  controller: ['$scope', '$http', 'socket', 'user', function($scope, $http, socket, user){
+  controller: ['$scope', 'channel', function($scope, channel){
     this.messages = [];
-    this.user = user.current();
     this.name = 'general';
+    this.connection = channel.connect(this.name);
 
     const push = message => {
       const lastMessage = this.messages[this.messages.length - 1];
@@ -20,22 +20,14 @@ app.component('channel', {
       this.messages.push(message);
     };
 
-    socket.on('message', message => {
-      push(message);
-    });
+    this.connection.receive(push);
 
     $scope.$on('message', (event, message) => {
-      message.timestamp = Date.now();
-      message.user = this.user ? this.user.name : 'anonymous';
-      message.channel = this.name || 'general';
-
-      push(message);
-      socket.emit('message', message);
+      push(this.connection.send(message));
     });
 
-    this.$onInit = function(){
-      $http
-      .get(`/channel/${this.name}`)
+    this.$onInit = () => {
+      this.connection.messages()
       .then(({data}) => data.forEach(push));
     };
 

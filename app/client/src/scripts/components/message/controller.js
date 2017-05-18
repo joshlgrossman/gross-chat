@@ -7,7 +7,7 @@ app.component('message', {
   },
 
   controller: ['user', function(user){
-    this.user = user.current();
+    this.me = user.is(this.message.user);
   }]
 
 });

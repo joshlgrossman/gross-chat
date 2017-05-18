@@ -1,8 +1,9 @@
-.message-container {
+.message {
+  display: block;
   text-align: left;
   margin-bottom: 4px;
 
-  .message {
+  .message-body {
     display: inline-block;
     max-width: 60%;
     padding: 12px;
@@ -32,7 +33,7 @@
   &.me {
     text-align: right;
 
-    .message {
+    .message-body {
       background-color: @color-blue-white;
       border-bottom-color: @color-blue-white - @color-shade * 1.5;
     }

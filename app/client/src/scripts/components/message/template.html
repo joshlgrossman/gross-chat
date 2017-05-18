@@ -1,13 +1,11 @@
-<div class="message-container" ng:class="{me: $ctrl.user.name == $ctrl.message.user.name}">
-  <div class="message">
-    <div class="message-info">
-      <div class="message-user-name">{{$ctrl.message.user}}</div>
-    </div>
-    <div class="message-contents">
-      <div class="message-content" ng:repeat="content in $ctrl.message.contents track by $index">
-        {{content}}
-      </div>
+<div class="message-body">
+  <div class="message-info">
+    <div class="message-user-name">{{$ctrl.message.user}}</div>
+  </div>
+  <div class="message-contents">
+    <div class="message-content" ng:repeat="content in $ctrl.message.contents track by $index">
+      {{content}}
     </div>
   </div>
-  <div class="message-timestamp">{{$ctrl.message.timestamp | date:'M/d h:mm a'}}</div>
 </div>
+<div class="message-timestamp">{{$ctrl.message.timestamp | date:'M/d h:mm a'}}</div>
