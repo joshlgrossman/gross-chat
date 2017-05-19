@@ -1,47 +1,40 @@
-app.factory('user', ['$cookies', '$http', function($cookies, $http){
+app.factory('user', ['$cookies', '$http', '$rootScope', '$q', function($cookies, $http, $rootScope, $q){
 
-	function current(user){
-		if(user !== undefined) $cookies.putObject('user', user);
-		else return $cookies.getObject('user');
+	let current = $cookies.getObject('user');
+
+	function register({name, password}){
+		return $http.post('/user/register', {name, password})
+		.then(user => {
+			return current = user;
+		});
 	}
-
-	function token(token){
-		if(token !== undefined) $cookies.putObject('token', token);
-		else return $cookies.getObject('token');
-	}
-
-	function data(data){
-		if(data){
-			current(data.user);
-			token(data.token);
-		} else {
-			return {
-				user: data.user,
-				token: data.token
-			}
-		}
-	}
-
-	function is(name){
-		const user = current();
-		return user && user.name === name;
-	}
-
-	function isLoggedIn(){ return current() !== undefined; }
 
 	function login({name, password}){
-		return $http.post('/user/authenticate', {name, password});
+		return $http.post('/user/authenticate', {name, password})
+		.then(user => {
+			return current = user;
+		});
 	}
 
 	function logout(){
-		$cookies.putObject('user', undefined);
-		$cookies.putObject('token', undefined);
+		return $q((resolve, reject) => {
+			if(!current) return reject();
+			current = undefined;
+			$cookies.putObject('user', undefined);
+			resolve();
+		});
 	}
 
-	function register({name, password}){
-		return $http.post('/user/register', {name, password});
+	function is(name){
+		return current && current.name === name;
 	}
 
-	return {current, token, data, login, logout, is, isLoggedIn, register};
+	return {
+		register,
+		login,
+		logout,
+		is,
+		get current(){ return current; }
+	};
 
 }]);

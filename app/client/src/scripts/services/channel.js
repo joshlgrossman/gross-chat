@@ -2,7 +2,7 @@ app.factory('channel', ['$http', 'socket', 'user', function($http, socket, user)
 
   function connect(name){
 
-    const currentUser = user.current();
+    const currentUser = user.current;
 
     function messages(){
       return $http.get(`/channel/${name}`);

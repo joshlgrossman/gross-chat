@@ -32,7 +32,7 @@ app.component('channel', {
 
     this.$onInit = () => {
       this.connection.messages()
-      .then(({data}) => data.forEach(push));
+      .then(({data}) => data.forEach(push))
     };
 
   }]

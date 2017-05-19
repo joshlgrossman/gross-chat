@@ -13,10 +13,8 @@ const User = require('../relations/User');
 const router = express.Router();
 
 function token(user) {
-	return {
-		user,
-		token: `JWT ${jwt.sign(user, config.secret, {subject: String(user.id), expiresIn: 172800})}`
-	};
+	user.token = `JWT ${jwt.sign(user, config.secret, {subject: String(user.id), expiresIn: 172800})}`;
+	return user;
 }
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
