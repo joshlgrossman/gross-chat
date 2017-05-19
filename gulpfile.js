@@ -18,30 +18,33 @@ gulp.task('watch', () => {
 });
 
 gulp.task('less', () => {
-	return gulp.src('./app/client/src/styles/styles.less')
-						.pipe(less({
-							paths: [path.join(__dirname, 'less', 'includes')]
-						}))
-						.pipe(minifyCSS())
-						.pipe(gulp.dest('./app/client/build/styles/'));
+	return gulp
+		.src('./app/client/src/styles/styles.less')
+		.pipe(less({
+			paths: [path.join(__dirname, 'less', 'includes')]
+		}))
+		.pipe(minifyCSS())
+		.pipe(gulp.dest('./app/client/build/styles/'));
 });
 
 gulp.task('js', () => {
-	return gulp.src(['./app/client/src/scripts/app.js', './app/client/src/scripts/**/*.js'])
-						.pipe(embedTemplates({
-							minimize: {empty: true}
-						}))
-						.pipe(replace(/\>[\s]+\</g, '><'))
-						.pipe(concat('app.js'))
-						.pipe(babel({
-							presets: ['es2015', 'es2016']
-						}))
-						.pipe(minifyJS())
-						.pipe(gulp.dest('./app/client/build/scripts/'));
+	return gulp
+		.src(['./app/client/src/scripts/app.js', './app/client/src/scripts/**/*.js'])
+		.pipe(embedTemplates({
+			minimize: {empty: true}
+		}))
+		.pipe(replace(/\>[\s]+\</g, '><'))
+		.pipe(concat('app.js'))
+		.pipe(babel({
+			presets: ['es2015', 'es2016']
+		}))
+		.pipe(minifyJS())
+		.pipe(gulp.dest('./app/client/build/scripts/'));
 });
 
 gulp.task('html', () => {
-	return gulp.src('./app/client/src/index.html')
-						.pipe(minifyHTML())
-						.pipe(gulp.dest('./app/client/build/'))
+	return gulp
+		.src('./app/client/src/index.html')
+		.pipe(minifyHTML())
+		.pipe(gulp.dest('./app/client/build/'));
 });
