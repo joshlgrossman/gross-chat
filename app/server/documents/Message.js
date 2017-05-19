@@ -9,9 +9,10 @@ const MessageSchema = new Mongoose.Schema({
     type: String,
     required: true
   },
-  timestamp: {
+  createdAt: {
     type: Date,
-    required: true
+    default: Date.now,
+    expires: '1d'
   },
   contents: {
     type: Array,

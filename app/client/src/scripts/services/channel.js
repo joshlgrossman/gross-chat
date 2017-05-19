@@ -9,7 +9,7 @@ app.factory('channel', ['$http', 'socket', 'user', function($http, socket, user)
     }
 
     function send(message){
-      message.timestamp = Date.now();
+      message.createdAt = Date.now();
       message.user = currentUser ? currentUser.name : 'anonymous';
       message.channel = name || 'general';
 
