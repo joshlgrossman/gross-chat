@@ -150,7 +150,15 @@ Command.Exit = new Command({
 Command.Config = new Command({
   aliases: ['config', 'info'],
   help: 'Get configuration settings',
-  execute: ([key, ...rest]) => Command.print(config[key])
+  execute: ([key, ...rest]) => {
+    if(~['list','all','help'].indexOf(key)) {
+      for(let k in config) {
+        let v = config[k];
+        if(typeof v == 'string') v = `"${v}"`;
+        Command.print(`${k}: ${(''+v).grey}`);
+      }
+    } else Command.print(config[key]);
+  }
 });
 Command.Time = new Command({
   aliases: ['time', 'up-time', 'start-time'],
