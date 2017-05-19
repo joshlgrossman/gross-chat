@@ -1,5 +1,11 @@
 const args = require('./command-line-args');
-const config = args['no-config'] ? {} : require('../../../config.json');
+let config;
+
+try {
+  config = require('../../../config.json');
+} catch (e) {
+  config = {};
+}
 
 const defaults = {
   "debug": true,
