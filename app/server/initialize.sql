@@ -28,12 +28,3 @@ CREATE TABLE memberships (
     REFERENCES channels(id)
     ON DELETE CASCADE
 );
-
-DROP TABLE IF EXISTS messages;
-CREATE TABLE messages (
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  content VARCHAR(1024) NOT NULL,
-  membership_id INT NOT NULL,
-  FOREIGN KEY (membership_id)
-    REFERENCES memberships(id)
-);

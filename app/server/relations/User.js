@@ -3,6 +3,8 @@ const Bookshelf = require('../utils/bookshelf');
 const shell = require('../shell');
 const tableName = 'users';
 
+require('./Channel');
+require('./Membership');
 const User = Bookshelf.model('User', {
 
   tableName,
@@ -21,7 +23,6 @@ const User = Bookshelf.model('User', {
     return bcrypt.compare(password, this.get('password'));
   },
 
-  messages(){ return this.hasMany('Message').through('Membership'); },
   channels(){ return this.belongsToMany('Channel').through('Membership'); }
 
 });

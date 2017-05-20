@@ -3,13 +3,11 @@ const shell = require('../shell');
 const tableName = 'channels';
 
 require('./User');
-require('./Message');
 const Channel = Bookshelf.model('Channel', {
 
   tableName,
 
-  users(){ return this.belongsToMany('User').through('Membership'); },
-  messages(){ return this.hasMany('Message'); }
+  users(){ return this.belongsToMany('User').through('Membership'); }
 
 });
 
