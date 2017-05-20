@@ -31,18 +31,23 @@
     text-transform: uppercase;
     color: @color-white;
 
-    background-color: @color-blue-light;
+    background-color: @color-grey;
     border: none;
-    border-bottom: 2px solid @color-blue;
+    border-bottom: 2px solid @color-grey-dark;
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
 
     transition: background-color 200ms, border-color 200ms;
-    cursor: pointer;
 
-    &:hover {
-      background-color: @color-blue-very-light;
-      border-bottom-color: @color-blue-light;
+    &.enabled {
+      cursor: pointer;
+      border-bottom: 2px solid @color-blue;
+      background-color: @color-blue-light;
+
+      &:hover {
+        background-color: @color-blue-very-light;
+        border-bottom-color: @color-blue-light;
+      }
     }
   }
 
