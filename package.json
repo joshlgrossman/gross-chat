@@ -4,8 +4,7 @@
   "description": "",
   "main": "app/server/server.js",
   "scripts": {
-    "start": "node app/server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app/server/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -32,19 +31,20 @@
     "node-schedule": "*"
   },
   "devDependencies": {
+    "babel-core": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-es2016": "*",
+    "babili": "*",
     "gulp": "^3.9.1",
+    "gulp-angular-embed-templates": "*",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^3.0.4",
     "gulp-cleanhtml": "^1.0.3",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^3.3.0",
-    "gulp-uglifyjs": "^0.6.2",
-    "gulp-angular-embed-templates": "*",
     "gulp-replace": "*",
-    "babel-core": "*",
-    "babel-preset-es2015": "*",
-    "babel-preset-es2016": "*",
-    "babili": "*",
+    "gulp-uglifyjs": "^0.6.2",
     "nodemon": "*"
   }
 }

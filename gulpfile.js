@@ -1,13 +1,15 @@
 const path = require('path');
 const gulp = require('gulp');
-const concat = require('gulp-concat');
 const less = require('gulp-less');
 const babel = require('gulp-babel');
 const minifyJS = require('gulp-uglifyjs');
 const minifyCSS = require('gulp-clean-css');
 const minifyHTML = require('gulp-cleanhtml');
 const replace = require('gulp-replace');
+const concat = require('gulp-concat');
 const embedTemplates = require('gulp-angular-embed-templates');
+const autoPrefixer = require('gulp-autoprefixer');
+
 
 gulp.task('default', ['less', 'js', 'html']);
 
@@ -22,6 +24,9 @@ gulp.task('less', () => {
 		.src('./app/client/src/styles/styles.less')
 		.pipe(less({
 			paths: [path.join(__dirname, 'less', 'includes')]
+		}))
+		.pipe(autoPrefixer({
+			browsers: ['last 2 versions']
 		}))
 		.pipe(minifyCSS())
 		.pipe(gulp.dest('./app/client/build/styles/'));
