@@ -11,8 +11,9 @@ const embedTemplates = require('gulp-angular-embed-templates');
 const autoPrefixer = require('gulp-autoprefixer');
 
 
-gulp.task('default', ['less', 'js', 'html']);
+gulp.task('default', ['watch']);
 
+gulp.task('build', ['less', 'js', 'html']);
 gulp.task('watch', () => {
   gulp.watch('./app/client/src/**/*.js', ['js']);
   gulp.watch('./app/client/src/**/*.less', ['less']);
