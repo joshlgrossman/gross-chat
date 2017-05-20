@@ -19,14 +19,14 @@ const cron = require('./cron');
 passport.use(passportStrategy);
 
 const app = express()
-.use(bodyParser.json())
-.use(bodyParser.urlencoded({
-	extended: true
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({
+  extended: true
 }))
 .use(passport.initialize())
 .use(passport.session())
 .use('/', express.static(
-	path.join(__dirname, '../client/build')
+  path.join(__dirname, '../client/build')
 ))
 .use('/user', userRoute)
 .use('/channel', channelRoute);
@@ -34,12 +34,12 @@ const app = express()
 let server;
 
 if(!config.ssl) {
-	server = require('http').createServer(app);
+  server = require('http').createServer(app);
 } else {
-	const fs = require('fs');
-	const key = fs.readFileSync(config.ssl_key);
-	const cert = fs.readFileSync(config.ssl_cert);
-	server = require('https').createServer({key, cert}, app).listen(config.port, shell.start);
+  const fs = require('fs');
+  const key = fs.readFileSync(config.ssl_key);
+  const cert = fs.readFileSync(config.ssl_cert);
+  server = require('https').createServer({key, cert}, app).listen(config.port, shell.start);
 }
 
 const io = require('socket.io')(server);
