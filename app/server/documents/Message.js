@@ -12,7 +12,7 @@ const MessageSchema = new Mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: '1d'
+    expires: 60*60*24 // 1d
   },
   contents: {
     type: Array,

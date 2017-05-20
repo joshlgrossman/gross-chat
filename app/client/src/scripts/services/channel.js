@@ -15,6 +15,8 @@ app.factory('channel', ['$http', 'socket', 'user', function($http, socket, user)
 
       socket.emit('message', message);
 
+      message.me = true;
+
       return message;
     }
 

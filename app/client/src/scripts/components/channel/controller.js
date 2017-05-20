@@ -13,10 +13,12 @@ app.component('channel', {
 
     const push = message => {
       const lastMessage = this.messages[this.messages.length - 1];
-      message.timestamp = new Date(message.timestamp);
+      message.createdAt = new Date(message.createdAt);
 
-      if(lastMessage && lastMessage.user === message.user &&
-        message.timestamp - lastMessage.timestamp < 60000){
+      if(lastMessage &&
+        lastMessage.me === message.me &&
+        lastMessage.user === message.user &&
+        message.createdAt - lastMessage.createdAt < 60000){
         lastMessage.contents.push(message.contents[0]);
         return;
       }

@@ -4,10 +4,6 @@ app.component('message', {
 
   bindings: {
     message: '<'
-  },
-
-  controller: ['user', function(user){
-    this.me = user.is(this.message.user);
-  }]
+  }
 
 });
