@@ -25,13 +25,13 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:channel', async (req, res, next) => {
-  
+
   const {channel} = req.params;
   try {
     const messages = await Message.Model
     .find({channel})
     .limit(100)
-    .sort({timestamp: 1});
+    .sort({createdAt: 1});
 
     res.json(messages);
   } catch (e) {
