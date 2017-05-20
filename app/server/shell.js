@@ -151,10 +151,9 @@ Command.Config = new Command({
   aliases: ['config', 'info'],
   help: 'Get configuration settings',
   execute: ([key, ...rest]) => {
-    if(~['list','all','help'].indexOf(key)) {
+    if(!key || ~['list','all','help'].indexOf(key)) {
       for(let k in config) {
         let v = config[k];
-        if(~k.indexOf('password')) v = (''+v).replace(/./g,'*');
         if(typeof v == 'string') v = `"${v}"`;
         Command.print(`${k}: ${(''+v).grey}`);
       }
