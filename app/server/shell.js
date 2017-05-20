@@ -150,8 +150,8 @@ Command.Exit = new Command({
 Command.Config = new Command({
   aliases: ['config', 'info'],
   help: 'Get configuration settings',
-  execute: ([key, ...rest]) => {
-    if(!key || ~['list','all','help'].indexOf(key)) {
+  execute: ([key = 'all', ...rest]) => {
+    if(~['list','all','help'].indexOf(key)) {
       for(let k in config) {
         let v = config[k];
         if(typeof v == 'string') v = `"${v}"`;
