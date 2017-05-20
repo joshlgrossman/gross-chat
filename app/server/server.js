@@ -11,7 +11,7 @@ const passportStrategy = require('./utils/passport-strategy');
 const userRoute = require('./routes/user');
 const channelRoute = require('./routes/channel');
 
-const messageSocket = require('./sockets/message');
+const channelSocket = require('./sockets/channel');
 
 const shell = require('./shell');
 const cron = require('./cron');
@@ -44,6 +44,6 @@ if(!config.ssl) {
 
 const io = require('socket.io')(server);
 
-messageSocket(io);
+channelSocket(io);
 
 server.listen(config.port, shell.start);
