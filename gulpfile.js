@@ -14,42 +14,42 @@ const autoPrefixer = require('gulp-autoprefixer');
 gulp.task('default', ['less', 'js', 'html']);
 
 gulp.task('watch', () => {
-	gulp.watch('./app/client/src/**/*.js', ['js']);
-	gulp.watch('./app/client/src/**/*.less', ['less']);
-	gulp.watch('./app/client/**/*.html', ['html', 'js']);
+  gulp.watch('./app/client/src/**/*.js', ['js']);
+  gulp.watch('./app/client/src/**/*.less', ['less']);
+  gulp.watch('./app/client/**/*.html', ['html', 'js']);
 });
 
 gulp.task('less', () => {
-	return gulp
-		.src('./app/client/src/styles/styles.less')
-		.pipe(less({
-			paths: [path.join(__dirname, 'less', 'includes')]
-		}))
-		.pipe(autoPrefixer({
-			browsers: ['last 2 versions']
-		}))
-		.pipe(minifyCSS())
-		.pipe(gulp.dest('./app/client/build/styles/'));
+  return gulp
+    .src('./app/client/src/styles/styles.less')
+    .pipe(less({
+      paths: [path.join(__dirname, 'less', 'includes')]
+    }))
+    .pipe(autoPrefixer({
+      browsers: ['last 2 versions']
+    }))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./app/client/build/styles/'));
 });
 
 gulp.task('js', () => {
-	return gulp
-		.src(['./app/client/src/scripts/app.js', './app/client/src/scripts/**/*.js'])
-		.pipe(embedTemplates({
-			minimize: {empty: true}
-		}))
-		.pipe(replace(/\>[\s]+\</g, '><'))
-		.pipe(concat('app.js'))
-		.pipe(babel({
-			presets: ['es2015', 'es2016']
-		}))
-		.pipe(minifyJS())
-		.pipe(gulp.dest('./app/client/build/scripts/'));
+  return gulp
+    .src(['./app/client/src/scripts/app.js', './app/client/src/scripts/**/*.js'])
+    .pipe(embedTemplates({
+      minimize: {empty: true}
+    }))
+    .pipe(replace(/\>[\s]+\</g, '><'))
+    .pipe(concat('app.js'))
+    .pipe(babel({
+      presets: ['es2015', 'es2016']
+    }))
+    .pipe(minifyJS())
+    .pipe(gulp.dest('./app/client/build/scripts/'));
 });
 
 gulp.task('html', () => {
-	return gulp
-		.src('./app/client/src/index.html')
-		.pipe(minifyHTML())
-		.pipe(gulp.dest('./app/client/build/'));
+  return gulp
+    .src('./app/client/src/index.html')
+    .pipe(minifyHTML())
+    .pipe(gulp.dest('./app/client/build/'));
 });
