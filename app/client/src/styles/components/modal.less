@@ -11,18 +11,43 @@
   &.open {
     visibility: visible;
     opacity: 1;
+
+    .modal-container {
+      #fill-container(10px);
+      border-radius: 4px;
+
+      @media @tablet-portrait {
+        #center();
+        max-width: 400px;
+      }
+    }
   }
 
   .modal-container {
-    #center();
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+
     padding: 20px;
     background-color: @color-white;
     border-bottom: 1px solid @color-grey-very-light;
+    border-radius: 100%;
     box-shadow: @shadow-large;
+
+    overflow: hidden;
+
+    transition: left @transition-speed,
+      right @transition-speed,
+      top @transition-speed,
+      bottom @transition-speed,
+      border-radius 1.1*@transition-speed,
+      max-width 1.1*@transition-speed;
 
     @media @tablet-portrait {
       min-height: 200px;
-      width: 400px;
+      max-width: 0;
     }
 
     .modal-title {
