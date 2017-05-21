@@ -4,7 +4,7 @@ app.directive('modal', function(){
     templateUrl: 'template.html',
     transclude: true,
     scope: {
-      title: '@'
+      heading: '@'
     },
 
     link: function($scope, element, attrs){
