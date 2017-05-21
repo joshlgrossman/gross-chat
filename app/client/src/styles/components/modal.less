@@ -1,0 +1,52 @@
+.modal {
+  #fill-container();
+  z-index: 9999;
+  background-color: fade(@color-grey, 30%);
+  padding: 10px;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: opacity @transition-speed;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal-container {
+    #center();
+    padding: 20px;
+    background-color: @color-white;
+    border-bottom: 1px solid @color-grey-very-light;
+    box-shadow: @shadow-large;
+
+    @media @tablet-portrait {
+      min-height: 200px;
+      width: 400px;
+    }
+
+    .modal-title {
+      font-size: 1.4em;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+
+      background: none;
+      border: none;
+      color: @color-red;
+      cursor: pointer;
+
+      transition: color @transition-speed;
+
+      &:hover {
+        color: @color-red-light;
+      }
+
+    }
+
+  }
+
+}
