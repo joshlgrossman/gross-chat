@@ -11,7 +11,10 @@ app.directive('modal', function(){
       element.addClass('modal');
 
       $scope.close = () => element.removeClass('open');
-      $scope.$on('open', event => element.addClass('open'));
+      $scope.$on('open', event => {
+        element.addClass('open');
+        element.find('input')[0].focus();
+      });
     }
 
   };
