@@ -4,17 +4,18 @@ app.directive('modal', function(){
     templateUrl: 'template.html',
     transclude: true,
     scope: {
-      heading: '@'
+      heading: '@',
+      open: '='
     },
 
     link: function($scope, element, attrs){
       element.addClass('modal');
 
       $scope.close = () => element.removeClass('open');
-      $scope.$on('open', event => {
+      $scope.open = () => {
         element.addClass('open');
         element.find('input')[0].focus();
-      });
+      };
     }
 
   };
