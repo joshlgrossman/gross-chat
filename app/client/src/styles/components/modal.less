@@ -11,11 +11,14 @@
     opacity: 1;
 
     .modal-container {
-      #fill-container(10px);
+      top: 10px;
+      left: 10px;
+      right: 10px;
       border-radius: 4px;
 
       @media @tablet-portrait {
         #center();
+        bottom: 0;
         max-width: 400px;
       }
     }
@@ -57,6 +60,7 @@
 
     .modal-title {
       font-size: 1.4em;
+      margin-bottom: 20px;
     }
 
     .modal-close {

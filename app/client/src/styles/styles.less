@@ -3,6 +3,7 @@
 @import "normalize";
 @import "variables";
 @import "mixins";
+@import "form";
 @import "components/channel";
 @import "components/message";
 @import "components/message-input";
@@ -43,4 +44,8 @@ body {
 
 .main-content {
   padding: 10px;
+}
+
+::selection {
+  background-color: @color-blue-very-light;
 }

@@ -1,0 +1,41 @@
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-family: @font-main;
+  font-size: 1em;
+  border: 1px solid @color-grey-light;
+  margin-bottom: 12px;
+
+  transition: border-color @transition-speed;
+
+  &:focus {
+    border-color: @color-blue-light;
+  }
+}
+
+.form-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-family: @font-main;
+  font-size: 1em;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  background-color: @color-green;
+  border: none;
+  border-bottom: 1px solid @color-green-dark;
+
+  box-shadow: @shadow-tiny;
+
+  transition: border @transition-speed, background-color @transition-speed;
+
+  &:hover {
+    background-color: @color-green-light;
+    border-bottom-color: @color-green;
+  }
+
+}
