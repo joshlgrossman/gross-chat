@@ -14,7 +14,7 @@ const autoPrefixer = require('gulp-autoprefixer');
 gulp.task('default', ['watch']);
 
 gulp.task('build', ['less', 'js', 'html']);
-gulp.task('watch', () => {
+gulp.task('watch', ['build'], () => {
   gulp.watch('./app/client/src/**/*.js', ['js']);
   gulp.watch('./app/client/src/**/*.less', ['less']);
   gulp.watch('./app/client/**/*.html', ['html', 'js']);
