@@ -12,7 +12,6 @@ app.directive('modal', function(){
 
       $scope.close = () => element.removeClass('open');
       $scope.$on('open', event => element.addClass('open'));
-
     }
 
   };
