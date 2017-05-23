@@ -8,11 +8,11 @@ app.directive('modal', function(){
       open: '='
     },
 
-    link: function($scope, element, attrs){
+    link: function(scope, element, attrs){
       element.addClass('modal');
 
-      $scope.close = () => element.removeClass('open');
-      $scope.open = () => {
+      scope.close = () => element.removeClass('open');
+      scope.open = () => {
         element.addClass('open');
         element.find('input')[0].focus();
       };
