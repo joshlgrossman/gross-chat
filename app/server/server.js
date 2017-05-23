@@ -21,15 +21,15 @@ passport.use(passportStrategy);
 const app = express()
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({
-  extended: true
-}))
-.use(passport.initialize())
-.use(passport.session())
-.use('/', express.static(
-  path.join(__dirname, '../client/build')
-))
-.use('/user', userRoute)
-.use('/channel', channelRoute);
+    extended: true
+  }))
+  .use(passport.initialize())
+  .use(passport.session())
+  .use('/', express.static(
+    path.join(__dirname, '../client/build')
+  ))
+  .use('/user', userRoute)
+  .use('/channel', channelRoute);
 
 let server;
 
