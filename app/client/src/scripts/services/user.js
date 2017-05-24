@@ -4,15 +4,17 @@ app.factory('user', ['$cookies', '$http', '$rootScope', '$q', function($cookies,
 
 	function register({name, password}){
 		return $http.post('/user/register', {name, password})
-		.then(user => {
-			return current = user;
+		.then(({data}) => {
+			$cookies.putObject('user', data);
+			return current = data;
 		});
 	}
 
 	function login({name, password}){
 		return $http.post('/user/authenticate', {name, password})
-		.then(user => {
-			return current = user;
+		.then(({data}) => {
+			$cookies.putObject('user', data);
+			return current = data;
 		});
 	}
 

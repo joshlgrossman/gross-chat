@@ -5,7 +5,8 @@ app.directive('modal', function(){
     transclude: true,
     scope: {
       heading: '@',
-      open: '='
+      open: '=',
+      close: '='
     },
 
     link: function(scope, element, attrs){
