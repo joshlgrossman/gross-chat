@@ -39,7 +39,7 @@ if(!config.ssl) {
   const fs = require('fs');
   const key = fs.readFileSync(config.ssl_key);
   const cert = fs.readFileSync(config.ssl_cert);
-  server = require('https').createServer({key, cert}, app).listen(config.port, shell.start);
+  server = require('https').createServer({key, cert}, app);
 }
 
 const io = require('socket.io')(server);
